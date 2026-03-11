@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="360" d:DesignHeight="220"
+        x:Class="InfiniteWords_Win.SelectWindow"
+        Title="New Window"
+        Width="360"
+        Height="220"
+        SystemDecorations="None"
+        PointerPressed="OnWindowPointerPressed"
+        Background="#11151C">
+    <Grid Margin="16">
+        <Border Background="#1B2430"
+                BorderBrush="#2A3647"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="14">
+            <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+                <TextBlock Grid.Row="0"
+                           Text="选择单词表"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Foreground="#FFFFFF"
+                           HorizontalAlignment="Center"/>
+
+                <ListBox Grid.Row="1"
+                         Name="CategoryListBox"
+                         Background="#16202B"
+                         BorderBrush="#2A3647"
+                         Foreground="#EAF2FF"
+                         Padding="6">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10,7"
+                                    Margin="0,2"
+                                    CornerRadius="6"
+                                    Background="Transparent">
+                                <TextBlock Text="{Binding}" FontSize="13" Foreground="#EAF2FF"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:pointerover">
+                            <Setter Property="Background" Value="#233247"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="#355077"/>
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
+
+                <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button Grid.Column="0"
+                            Content="退出"
+                            Click="ExitButton_Click"
+                            HorizontalAlignment="Stretch"
+                            Padding="12,6"
+                            Background="#252F3E"
+                            Foreground="#D7E3F6"
+                            BorderBrush="#3B4C63"/>
+
+                    <Button Grid.Column="1"
+                            Content="开始学习"
+                            Click="OpenWordWindowButton_Click"
+                            HorizontalAlignment="Stretch"
+                            Padding="12,6"
+                            Background="#2A3647"
+                            Foreground="#EAF2FF"
+                            BorderBrush="#3B4C63"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

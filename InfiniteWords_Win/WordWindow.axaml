@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="220" d:DesignHeight="100"
+        x:Class="InfiniteWords_Win.WordWindow"
+        Title="Word"
+        Width="220"
+        Height="100"
+        SystemDecorations="None"
+        PointerPressed="OnWindowPointerPressed"
+        KeyDown="OnWindowKeyDown"
+        Background="#11151C">
+        <Grid Margin="6">
+                <Border Background="#1B2430"
+                        BorderBrush="#2A3647"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="6">
+                        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="2">
+                                <Grid Grid.Row="0" ColumnDefinitions="*,Auto,*">
+                                        <Button Grid.Column="2" Content="后退" Click="BackButton_Click" HorizontalAlignment="Right" Padding="6,2" FontSize="10" Background="#2A3647" Foreground="#EAF2FF" BorderBrush="#3B4C63"/>
+                                </Grid>
+                                <TextBlock Grid.Row="0" Name="NumTextBlock" Text="1/30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Foreground="#8FA1B8"/>
+                                <TextBlock Grid.Row="1" Name="WordTextBlock" Text="apple" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF" TextTrimming="CharacterEllipsis" MaxLines="1"/>
+                                <TextBlock Grid.Row="2" Name="MeaningTextBlock" Text="苹果" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="Inter, Microsoft YaHei UI, Segoe UI" Foreground="#B8CAE2" TextTrimming="CharacterEllipsis" MaxLines="1"/>
+                        </Grid>
+                </Border>
+        </Grid>
+</Window>
