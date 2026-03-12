@@ -17,6 +17,8 @@ public partial class WordWindow : Window
         {
             Next();
         }
+
+        MeaningTextBlock.Opacity = 0;
     }
 
     private void Next()
@@ -66,7 +68,13 @@ public partial class WordWindow : Window
         {
             Next();
             e.Handled = true;
-        }else if (e.Key == Key.Escape)
+        }
+        else if (e.Key == Key.L || e.Key == Key.Up || e.Key == Key.Down)
+        {
+            MeaningTextBlock.Opacity = MeaningTextBlock.Opacity == 0 ? 1 : 0;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
         {
             Back();
             e.Handled = true;

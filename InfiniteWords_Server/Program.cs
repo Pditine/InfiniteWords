@@ -16,7 +16,7 @@ internal class Program
         }
 
         using var listener = new HttpListener();
-        listener.Prefixes.Add($"http://localhost:{Port}/");
+        listener.Prefixes.Add($"http://*:{Port}/");
         listener.Start();
 
         Console.WriteLine($"Server started on port {Port}");
