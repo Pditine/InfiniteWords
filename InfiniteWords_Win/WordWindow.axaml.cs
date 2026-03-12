@@ -37,6 +37,7 @@ public partial class WordWindow : Window
         NumTextBlock.Text = $"{_currentIndex + 1}/{_wordContainer.Words.Count}";
         WordTextBlock.Text = currentWord.Text;
         MeaningTextBlock.Text = currentWord.Type + "  " + currentWord.Meaning;
+        MeaningTextBlock.Opacity = 0;
     }
 
     private void Previous()
@@ -55,6 +56,7 @@ public partial class WordWindow : Window
         NumTextBlock.Text = $"{_currentIndex + 1}/{_wordContainer.Words.Count}";
         WordTextBlock.Text = currentWord.Text;
         MeaningTextBlock.Text = currentWord.Type + "  " + currentWord.Meaning;
+        MeaningTextBlock.Opacity = 0;
     }
 
     private void OnWindowKeyDown(object? sender, KeyEventArgs e)
