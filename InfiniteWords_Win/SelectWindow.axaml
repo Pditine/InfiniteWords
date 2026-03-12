@@ -8,6 +8,7 @@
         Width="360"
         Height="220"
         SystemDecorations="None"
+        Icon="/Assets/flower.ico"
         PointerPressed="OnWindowPointerPressed"
         Background="#11151C">
     <Grid Margin="16">
@@ -16,7 +17,7 @@
                 BorderThickness="1"
                 CornerRadius="10"
                 Padding="14">
-            <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+            <Grid RowDefinitions="Auto,*,Auto,Auto" RowSpacing="10">
                 <TextBlock Grid.Row="0"
                            Text="选择单词表"
                            FontSize="16"
@@ -76,6 +77,24 @@
                             Foreground="#EAF2FF"
                             BorderBrush="#3B4C63"/>
                 </Grid>
+
+                <Button Grid.Row="3"
+                        Content="v0.0.1"
+                        Click="OnVersionClick"
+                        HorizontalAlignment="Center"
+                        FontSize="10"
+                        Foreground="#566275"
+                        Background="Transparent"
+                        Padding="0"
+                        BorderThickness="0"
+                        Cursor="Hand">
+                         <Button.Styles>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="Foreground" Value="#8692A6"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                         </Button.Styles>
+                </Button>
             </Grid>
         </Border>
     </Grid>

@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <ApplicationIcon>Assets\flower.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,6 +20,10 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
+    </ItemGroup>
+    
     <ItemGroup>
       <Compile Update="WordWindow.axaml.cs">
         <DependentUpon>MainWindow.axaml</DependentUpon>

@@ -57,12 +57,12 @@ public partial class WordWindow : Window
 
     private void OnWindowKeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key == Key.J)
+        if (e.Key == Key.J || e.Key == Key.Left)
         {
             Previous();
             e.Handled = true;
         }
-        else if (e.Key == Key.K)
+        else if (e.Key == Key.K || e.Key == Key.Right)
         {
             Next();
             e.Handled = true;

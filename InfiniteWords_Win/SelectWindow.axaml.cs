@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -90,5 +92,26 @@ public partial class SelectWindow : Window
     private void ExitButton_Click(object? sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void OnVersionClick(object? sender, RoutedEventArgs e)
+    {
+        const string url = "https://github.com/Pditine/InfiniteWords";
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+        }
     }
 }

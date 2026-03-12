@@ -129,7 +129,6 @@
 *~
 
 # Exceptions
-/*.sln
 /*.xcodeproj
 /Makefile
 /CMakeLists.txt

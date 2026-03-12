@@ -8,6 +8,7 @@
         Width="220"
         Height="100"
         SystemDecorations="None"
+        Icon="/Assets/flower.ico"
         PointerPressed="OnWindowPointerPressed"
         KeyDown="OnWindowKeyDown"
         Background="#11151C">

@@ -10,6 +10,11 @@ public static class DataManager
 
     public static void LoadData()
     {
+        if (!System.IO.Directory.Exists(DataPath))
+        {
+            System.IO.Directory.CreateDirectory(DataPath);
+        }
+        
         var files = System.IO.Directory.GetFiles(DataPath, "*.csv");
         foreach (var file in files)
         {
