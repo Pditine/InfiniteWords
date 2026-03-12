@@ -96,7 +96,7 @@ public partial class SelectWindow : Window
 
     private void OnVersionClick(object? sender, RoutedEventArgs e)
     {
-        const string url = "https://github.com/Pditine/InfiniteWords";
+        const string url = Const.Website;
 
         try
         {
