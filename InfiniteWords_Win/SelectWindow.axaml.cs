@@ -14,6 +14,21 @@ public partial class SelectWindow : Window
     {
         InitializeComponent();
         LoadCategories();
+        
+        DataManager.OnDataUpdated += () =>
+        {
+            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var selected = CategoryListBox.SelectedItem as string;
+                LoadCategories();
+                if (selected != null)
+                {
+                    CategoryListBox.SelectedItem = selected;
+                }
+            });
+        };
+
+        _ = DataManager.LoadRemoteDataAsync();
     }
 
     public void SetInitPosition()
