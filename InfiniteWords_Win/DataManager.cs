@@ -3,9 +3,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace InfiniteWords_Win;
+
+[JsonSerializable(typeof(List<string>))]
+public partial class AppJsonContext : JsonSerializerContext
+{
+}
 
 public static class DataManager
 {
@@ -40,13 +46,13 @@ public static class DataManager
     public static async Task LoadRemoteDataAsync()
     {
         using var client = new HttpClient();
-        client.BaseAddress = new Uri("http://localhost:8080/");
+        
+        client.BaseAddress = new Uri($"http://{Const.Server}:8080/");
         
         try 
         {
             var listJson = await client.GetStringAsync("list");
-            var files = JsonSerializer.Deserialize<List<string>>(listJson);
-            
+            var files = JsonSerializer.Deserialize(listJson, AppJsonContext.Default.ListString);
             if (files != null)
             {
                 bool updated = false;

@@ -1,7 +1,13 @@
 ﻿using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace InfiniteWords_Server;
+
+[JsonSerializable(typeof(List<string>))]
+internal partial class AppJsonContext : JsonSerializerContext
+{
+}
 
 internal class Program
 {
@@ -16,7 +22,11 @@ internal class Program
         }
 
         using var listener = new HttpListener();
+#if DEBUG
+        listener.Prefixes.Add($"http://localhost:{Port}/");
+#else
         listener.Prefixes.Add($"http://*:{Port}/");
+#endif
         listener.Start();
 
         Console.WriteLine($"Server started on port {Port}");
@@ -31,8 +41,11 @@ internal class Program
 
     private static async Task ProcessRequest(HttpListenerContext context)
     {
+#if !DEBUG
         try
         {
+#endif
+            Console.WriteLine($"Received request: {context.Request.HttpMethod} {context.Request.Url}");
             var request = context.Request;
             var response = context.Response;
 
@@ -40,7 +53,7 @@ internal class Program
 
             if (path == "" || path == "/list")
             {
-                // List CSV files
+                // 列出 CSV 文件
                 var files = Directory.GetFiles(DataPath, "*.csv");
                 var fileNames = new List<string>();
                 foreach (var file in files)
@@ -48,11 +61,12 @@ internal class Program
                     fileNames.Add(Path.GetFileName(file));
                 }
 
-                var json = JsonSerializer.Serialize(fileNames);
+                var json = JsonSerializer.Serialize(fileNames, AppJsonContext.Default.ListString);
                 var buffer = System.Text.Encoding.UTF8.GetBytes(json);
 
                 response.ContentType = "application/json";
                 response.ContentLength64 = buffer.Length;
+                Console.WriteLine($"Responding with file list: {string.Join(", ", fileNames)}");
                 await response.OutputStream.WriteAsync(buffer);
             }
             else if (path == "/download")
@@ -60,22 +74,27 @@ internal class Program
                 var filename = request.QueryString["filename"];
                 if (string.IsNullOrEmpty(filename))
                 {
-                    response.StatusCode = 400; // Bad Request
+                    response.StatusCode = 400; // 错误请求
                 }
                 else
                 {
+                    // 清理文件名以防止目录遍历和 CRLF 注入
+                    filename = Path.GetFileName(filename); 
+                    filename = filename.Replace("\r", "").Replace("\n", "");
+
                     var filePath = Path.Combine(DataPath, filename);
                     if (File.Exists(filePath))
                     {
                         var buffer = await File.ReadAllBytesAsync(filePath);
-                        response.ContentType = "text/csv; charset=UTF-8"; // Explicit UTF-8
+                        response.ContentType = "text/csv; charset=UTF-8"; // 显式指定 UTF-8
                         response.ContentLength64 = buffer.Length;
-                        response.AddHeader("Content-Disposition", $"attachment; filename=\"{filename}\"");
+                        // response.AddHeader("Content-Disposition", $"attachment; filename=\"{filename}\"");
+                        Console.WriteLine($"Responding with file: {filename} ({buffer.Length} bytes)");
                         await response.OutputStream.WriteAsync(buffer);
                     }
                     else
                     {
-                        response.StatusCode = 404; // Not Found
+                        response.StatusCode = 404; // 未找到
                     }
                 }
             }
@@ -86,9 +105,11 @@ internal class Program
 
             response.Close();
         }
+#if !DEBUG
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing request: {ex.Message}");
         }
     }
+#endif
 }
