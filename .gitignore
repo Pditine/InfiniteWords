@@ -156,3 +156,6 @@ bin/
 
 # Annoying windows files
 [Dd]esktop.ini
+
+# Assets
+!/InfiniteWords_Win/Assets/*ico
