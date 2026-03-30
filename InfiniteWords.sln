@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteWords_Win", "InfiniteWords_Win\InfiniteWords_Win.csproj", "{0125CC1E-45EA-464D-870F-C0E5B10C6B92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteWords_PC", "InfiniteWords_PC\InfiniteWords_PC.csproj", "{0125CC1E-45EA-464D-870F-C0E5B10C6B92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteWords_Server", "InfiniteWords_Server\InfiniteWords_Server.csproj", "{EE716296-0A7B-428E-AC46-AA3B1451DB8F}"
 EndProject
